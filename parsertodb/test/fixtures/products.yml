@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Num: 
+  UNNRec: 
+  KorNameOnly: MyText
+  Nazn: MyText
+  Cod: 1
+  Acc: 
+  Db: 1.5
+  DbS: 1.5
+  Credit: 9.99
+  CreditS: 9.99
+  QueuePay: 1
+  VidDoc: 1
+  DocDate: 2016-12-06 12:44:52
+  DocType: MyText
+
+two:
+  Num: 
+  UNNRec: 
+  KorNameOnly: MyText
+  Nazn: MyText
+  Cod: 1
+  Acc: 
+  Db: 1.5
+  DbS: 1.5
+  Credit: 9.99
+  CreditS: 9.99
+  QueuePay: 1
+  VidDoc: 1
+  DocDate: 2016-12-06 12:44:52
+  DocType: MyText
