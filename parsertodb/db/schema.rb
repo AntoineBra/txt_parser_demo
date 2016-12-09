@@ -10,26 +10,57 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161204095157) do
+ActiveRecord::Schema.define(version: 20161209093349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "products", force: :cascade do |t|
-    t.bigint   "Num"
-    t.bigint   "UNNRec"
+    t.text     "Num"
+    t.text     "UNNRec"
     t.text     "KorNameOnly"
     t.text     "Nazn"
-    t.integer  "Cod"
-    t.bigint   "Acc"
-    t.float    "Db"
-    t.float    "DbS"
-    t.decimal  "Credit"
-    t.decimal  "CreditS"
-    t.integer  "QueuePay"
-    t.integer  "VidDoc"
-    t.datetime "DocDate"
+    t.text     "Cod"
+    t.text     "Acc"
+    t.text     "Db"
+    t.text     "DbS"
+    t.text     "Credit"
+    t.text     "CreditS"
+    t.text     "QueuePay"
+    t.text     "VidDoc"
+    t.text     "DocDate"
     t.text     "DocType"
+    t.text     "DB"
+    t.text     "DBS"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "system_data", force: :cascade do |t|
+    t.text     "CR"
+    t.text     "CRS"
+    t.text     "DateOut"
+    t.text     "DebOut"
+    t.text     "CrOut"
+    t.text     "RestOutS"
+    t.text     "stampLeft"
+    t.text     "stampRight"
+    t.text     "stampTop"
+    t.text     "stampBottom"
+    t.text     "KOD_SOATO"
+    t.text     "SEAL_NUMBER"
+    t.text     "FILIAL_NAME"
+    t.text     "PODR_NAME"
+    t.text     "DATE_PROV"
+    t.text     "USER"
+    t.text     "USER_KOD"
+    t.text     "Answer"
+    t.text     "AppSign"
+    t.text     "BAppSign"
+    t.text     "FIOSign"
+    t.text     "BFIOSign"
+    t.text     "KeySign"
+    t.text     "BKeySign"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

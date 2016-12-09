@@ -1,21 +1,22 @@
 class CreateProducts < ActiveRecord::Migration[5.0]
   def change
     create_table :products do |t|
-      t.bigint :Num
-      t.bigint :UNNRec
-      t.text :KorNameOnly
-      t.text :Nazn
-      t.integer :Cod
-      t.bigint :Acc
-      t.float :Db
-      t.float :DbS
-      t.decimal :Credit
-      t.decimal :CreditS
-      t.integer :QueuePay
-      t.integer :VidDoc
-      t.datetime :DocDate
-      t.text :DocType
-
+      t.text  :Num
+      t.text  :UNNRec
+      t.text  :KorNameOnly
+      t.text  :Nazn
+      t.text  :Cod
+      t.text  :Acc
+      t.text  :Db
+      t.text  :DbS
+      t.text  :Credit
+      t.text  :CreditS
+      t.text  :QueuePay
+      t.text  :VidDoc
+      t.text  :DocDate
+      t.text  :DocType
+      t.text  :DB
+      t.text  :DBS
       t.timestamps
     end
   end
