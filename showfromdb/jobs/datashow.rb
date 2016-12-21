@@ -2,9 +2,10 @@
 require "pg"
 
 SCHEDULER.every '10m', :first_in => 0 do |job|
-  db = PG.connect(:hostaddr => "0.0.0.0", :user => "AntonMac", :password => "12345678", :port => 5432, :dbname => "parseddb_fordashing_development" )
+  db = PG.connect(:dbname => "parseddb_fordashing_development" )
   acctitems_fir = []
   acctitems_sec = []
+
   db.exec("SELECT * FROM products") do |results|
 	  acctitems_fir = results.map do |row|
 	    row = {
@@ -59,5 +60,11 @@ SCHEDULER.every '10m', :first_in => 0 do |job|
 	    }
 	  end
 	end
-  send_event('show_widget', { title: "DATA FROM DATA BASE", items_fir: acctitems_fir, items_sec: acctitems_sec })
+
+#  send_event('show_widget', { title: "DATA FROM DATA BASE", items_fir: acctitems_fir, items_sec: acctitems_sec })
+send_event('show_widget', { title: "DATA FROM DATA BASE", items_fir: acctitems_fir, items_sec: acctitems_sec })
 end
+
+
+
+

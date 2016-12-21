@@ -1,7 +1,7 @@
 class CreateProducts < ActiveRecord::Migration[5.0]
   def change
     create_table :products do |t|
-      t.text  :Num
+      t.bigint  :Num
       t.text  :UNNRec
       t.text  :KorNameOnly
       t.text  :Nazn

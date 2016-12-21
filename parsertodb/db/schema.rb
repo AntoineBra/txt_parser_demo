@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161209093349) do
+ActiveRecord::Schema.define(version: 20161220120021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "products", force: :cascade do |t|
-    t.text     "Num"
+    t.bigint   "Num"
     t.text     "UNNRec"
     t.text     "KorNameOnly"
     t.text     "Nazn"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20161209093349) do
     t.text     "DBS"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["Num"], name: "index_parseddb_fordashing_development_num", unique: true, using: :btree
   end
 
   create_table "system_data", force: :cascade do |t|
@@ -63,6 +64,7 @@ ActiveRecord::Schema.define(version: 20161209093349) do
     t.text     "BKeySign"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["Answer"], name: "index_parseddb_fordashing_development_answer", unique: true, using: :btree
   end
 
 end
