@@ -4,34 +4,62 @@ namespace :parser_task do
 	desc "Parser"
 	task :parse do
 
-		def save_to_db_values(lines, model, uniqueField)
-			uniqueField = uniqueField.to_sym
-			lines.each_slice(14)
-      		.map{|l| l.map { |x| x[1..-2].delete("^").split('=') } }
-      		.select{|l| l.length == 14}
-      		.map{|l| l.map{|k,v| [k,v[0..-2]]} }
-      		.map(&:flatten)
-      		.map{|x| Hash[*x].symbolize_keys}
-      		.each{|l| model.find_or_create_by(uniqueField => l[uniqueField]).update(l.except(uniqueField)) }
+		class PrepareStrings
+			OPERATION_LENGTH = 14
+			def initialize(lines)
+				@lines=lines
+			end
+			
+			def slice
+				@lines.each_slice(OPERATION_LENGTH).map {|i| ConvertLinesToHash.new(i).to_h }
+			end
 		end
 
-		def save_to_db_system_data(lines, model, uniqueField)
-			uniqueField = uniqueField.to_sym
-			puts lines.map{|l| l[1..-2].delete("^").chomp.split('=') }
-					.each_with_object(SystemDatum.new){|(k,v), obj| obj.public_send("#{k}=", v) }.save
+		class StringSplitter
+			def initialize(string)
+				@string = string
+			end
+
+			def to_a
+				@string.delete("^").chomp.split('=')
+			end
 		end
 
+		class ConvertLinesToHash
+			def initialize(lines)
+				@lines = lines
+			end
+			
+			def to_h
+				@lines.each_with_object({}) do |l,hash|
+					k,v = StringSplitter.new(l).to_a
+					hash[k]=v
+				end
+			end
+		end
 
+		class SaveToDB
+			def initialize(hash, model, uniqueField)
+				@hash=hash
+				@model=model
+				@uniqueField=uniqueField
+			end
 
-		def define_the_begin_of_read(lines)
+			def save
+				@model.find_or_create_by(@uniqueField => @hash[@uniqueField]).update(@hash.except(@uniqueField))
+			end
+		end
+
+		def begin_of_read(lines)
 			lines.each_with_index.find{|val, ind| val["^Num"]}.last
 		end
 
 
-
-		lines = File.readlines("/Users/AntonMac/Dropbox/transfer/export2.txt")
-		data_first = save_to_db_values(lines[define_the_begin_of_read(lines)..-25], Product, 'Num')
-    data_second = save_to_db_system_data(lines[-24..-2], SystemDatum, 'Answer')
+		lines = File.readlines("/Users/AntonMac/Dropbox/transfer/export.txt", encoding: "windows-1251")
+		beginLine = begin_of_read(lines)
+		PrepareStrings.new(lines[beginLine..-26]).slice.each {|i| SaveToDB.new(i, Product, 'Num').save }
+		SaveToDB.new(ConvertLinesToHash.new(lines[-25...-1]).to_h, SystemDatum, 'Answer').save
 
 	end
 end
+

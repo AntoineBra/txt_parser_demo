@@ -6,3 +6,5 @@ class AddUniqueIndexToNum < ActiveRecord::Migration[5.0]
              ON system_data USING btree ("Answer");'
   end
 end
+
+
