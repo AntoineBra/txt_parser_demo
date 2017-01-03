@@ -16,6 +16,8 @@ ActiveRecord::Schema.define(version: 20161220120021) do
   enable_extension "plpgsql"
 
   create_table "products", force: :cascade do |t|
+    t.text     "DocDate"
+    t.text     "DocType"
     t.bigint   "Num"
     t.text     "UNNRec"
     t.text     "KorNameOnly"
@@ -28,16 +30,14 @@ ActiveRecord::Schema.define(version: 20161220120021) do
     t.text     "CreditS"
     t.text     "QueuePay"
     t.text     "VidDoc"
-    t.text     "DocDate"
-    t.text     "DocType"
-    t.text     "DB"
-    t.text     "DBS"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["Num"], name: "index_parseddb_fordashing_development_num", unique: true, using: :btree
   end
 
   create_table "system_data", force: :cascade do |t|
+    t.text     "DB"
+    t.text     "DBS"
     t.text     "CR"
     t.text     "CRS"
     t.text     "DateOut"

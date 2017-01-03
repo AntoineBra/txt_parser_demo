@@ -1,6 +1,8 @@
 class CreateSystemData < ActiveRecord::Migration[5.0]
   def change
     create_table :system_data do |t|
+    	t.text  :DB
+      	t.text  :DBS
     	t.text	:CR
 		t.text	:CRS
 		t.text	:DateOut
