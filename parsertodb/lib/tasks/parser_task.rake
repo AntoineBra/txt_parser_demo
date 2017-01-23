@@ -54,7 +54,7 @@ namespace :parser_task do
 			lines.each_with_index.find{|val, ind| val["^DocDate"]}.last
 		end
 
-		lines = File.readlines("/Users/AntonMac/Dropbox/transfer/export.txt", encoding: "windows-1251")
+		lines = File.readlines("/Users/AntonMac/Dropbox/transfer/export22.txt", encoding: "windows-1251")
 		beginLine = begin_of_read(lines)
 		PrepareStrings.new(lines[beginLine...-27]).slice.each {|i| SaveToDB.new(i, Product, 'Num').save }
 		SaveToDB.new(ConvertLinesToHash.new(lines[-27...-1]).to_h, SystemDatum, 'Answer').save
